@@ -36,6 +36,12 @@ pip install django
 python manage.py migrate
 ```
 
+### Update database
+```bash
+python manage.py makemigrations [nome_app]
+python manage.py migrate
+```
+
 ### Run server
 ```bash
 python manage.py runserver
