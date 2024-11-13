@@ -1,7 +1,9 @@
 ## Comandi git
 
 ### Clone repository
+```bash
 git clone [ulr]
+```
 
 ## Comandi django
 
