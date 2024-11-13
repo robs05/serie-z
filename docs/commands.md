@@ -1,3 +1,8 @@
+## Comandi git
+
+### Clone repository
+git clone [ulr]
+
 ## Comandi django
 
 ### Create virtual environment
