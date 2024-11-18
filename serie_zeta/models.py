@@ -1,20 +1,20 @@
 from django.db import models
 
-class Squadra(models.Model):
-    nome = models.CharField(max_length=50)
-    colore_divisa = models.CharField(max_length=50)
-    num_max_giocatori = models.IntegerField()
+class Team(models.Model):
+    name = models.CharField(max_length=50)
+    jersey_color = models.CharField(max_length=50)
+    players_num_max = models.IntegerField()
 
     def __str__(self):
-        return self.nome
+        return self.name
 
-class Torneo(models.Model):
-    nome = models.CharField(max_length=100)
-    descrizione = models.TextField()
-    data_inizio = models.DateField()
-    data_fine = models.DateField()
-    squadre = models.ManyToManyField(Squadra)
+class Tournament(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    start_date = models.DateField()
+    end_date = models.DateField()
+    teams = models.ManyToManyField(Team)
 
     def __str__(self):
-        return self.nome
+        return self.name
 
