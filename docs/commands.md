@@ -5,6 +5,12 @@
 git clone [ulr]
 ```
 
+### Reset main/origin
+```bash
+git fetch origin
+git reset --hard origin/main
+```
+
 ## Comandi django
 
 ### Create virtual environment
