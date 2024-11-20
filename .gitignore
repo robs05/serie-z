@@ -47,3 +47,7 @@ env/
 
 # DB
 *.sqlite3
+
+# coverage
+.coverage
+htmlcov
