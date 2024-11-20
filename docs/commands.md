@@ -48,6 +48,11 @@ python manage.py makemigrations [nome_app]
 python manage.py migrate
 ```
 
+### Create superuser
+```bash
+python manage.py createsuperuser
+```
+
 ### Run server
 ```bash
 python manage.py runserver
