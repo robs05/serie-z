@@ -5,6 +5,11 @@ class Team(models.Model):
     name = models.CharField(max_length=50)
     jersey_color = models.CharField(max_length=50)
     players_num_max = models.IntegerField()
+    is_deleted = models.BooleanField(default=False)
+
+    def delete(self, *args, **kwargs):
+        self.is_deleted = True
+        self.save()
 
     def __str__(self):
         return self.name
@@ -14,10 +19,18 @@ class Tournament(models.Model):
     description = models.TextField()
     start_date = models.DateField()
     end_date = models.DateField()
-    teams = models.ManyToManyField(Team)
+    teams = models.ManyToManyField(Team, through='TournamentParticipation')
 
     def __str__(self):
         return self.name
+
+class TournamentParticipation(models.Model):
+    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, limit_choices_to={'is_deleted': False})
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+    participation_date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.team.name} in {self.tournament.name} - {self.participation_date}"
 
 class Player(models.Model):
     GOALKEEPER = 'GK'
