@@ -16,6 +16,7 @@ class Team(models.Model):
 
 class Tournament(models.Model):
     name = models.CharField(max_length=100)
+    code = models.CharField(max_length=50, unique=True)
     description = models.TextField()
     start_date = models.DateField()
     end_date = models.DateField()
@@ -84,7 +85,7 @@ class Match(models.Model):
     match_date = models.DateTimeField()
 
     def __str__(self):
-        return f"{self.home_team.name}({self.home_team_goals}) vs {self.away_team.name}({self.away_team_goals})  - {self.match_date}"
+        return f"{self.home_team.name}({self.home_team_goals}) vs {self.away_team.name}({self.away_team_goals}) - {self.match_date}"
 
 class Referee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

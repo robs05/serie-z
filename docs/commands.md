@@ -57,3 +57,19 @@ python manage.py createsuperuser
 ```bash
 python manage.py runserver
 ```
+
+## Test
+```bash
+python manage.py test serie_zeta/tests
+```
+
+## Coverage
+```bash
+coverage run manage.py test serie_zeta/tests
+coverage report
+```
+generate html report
+```bash
+coverage html
+```
+
