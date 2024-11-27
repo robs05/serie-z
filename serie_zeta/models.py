@@ -23,7 +23,7 @@ class Tournament(models.Model):
     teams = models.ManyToManyField(Team, through='TournamentParticipation')
 
     def __str__(self):
-        return self.name
+        return self.name + " - " + self.code
 
 class TournamentParticipation(models.Model):
     team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, limit_choices_to={'is_deleted': False})
@@ -58,7 +58,7 @@ class Player(models.Model):
     team = models.ForeignKey(Team, on_delete=models.SET(0))
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name} {self.position} {self.jersey_number}"
 
 class Placement(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
@@ -92,7 +92,10 @@ class Referee(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     birth_date = models.DateField()
-    exeperience = models.IntegerField()
+    exeperience = models.IntegerField(null=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} {self.exeperience} years of experience"
+        if self.exeperience is None:
+            return f"{self.first_name} {self.last_name}"
+        else:
+            return f"{self.first_name} {self.last_name} {self.exeperience} years of experience"
