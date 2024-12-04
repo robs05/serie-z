@@ -8,6 +8,7 @@ class Team(models.Model):
     is_deleted = models.BooleanField(default=False)
 
     def delete(self, *args, **kwargs):
+        self.player_set.update(team=None)
         self.is_deleted = True
         self.save()
 
@@ -54,8 +55,7 @@ class Player(models.Model):
     position = models.CharField(max_length=50, choices=POSITION_CHOICES)
     captain = models.BooleanField()
     jersey_number = models.IntegerField()
-    # The player belongs to a team and if code is 0 the player is not part of any team
-    team = models.ForeignKey(Team, on_delete=models.SET(0))
+    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.position} {self.jersey_number}"
@@ -78,11 +78,12 @@ class Placement(models.Model):
 class Match(models.Model):
 
     # to verify
-    home_team = models.ForeignKey(Team, on_delete=models.SET_NULL, related_name='home_team', null=True)
-    away_team = models.ForeignKey(Team, on_delete=models.SET_NULL, related_name='away_team', null=True)
+    home_team = models.ForeignKey(Team, on_delete=models.SET_NULL, related_name='home_team_match', null=True)
+    away_team = models.ForeignKey(Team, on_delete=models.SET_NULL, related_name='away_team_match', null=True)
     home_team_goals = models.IntegerField()
     away_team_goals = models.IntegerField()
     match_date = models.DateTimeField()
+    referee = models.ForeignKey('Referee', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"{self.home_team.name}({self.home_team_goals}) vs {self.away_team.name}({self.away_team_goals}) - {self.match_date}"

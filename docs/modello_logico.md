@@ -8,6 +8,6 @@ classifiche(ID, id_squadra FK, id_classifica, punti, pv, pn, pp, gf, gs, dr)
 
 partecipanti(ID_partecipante, nome, cognome, data_nascita, ruolo, capitano, num_maglia, id_squadra FK)
 
-partite(ID_partita, data_ora, id_squadra_a FK, id_squadra_b FK, goal_a, goal_b)
+partite(ID_partita, data_ora, id_squadra_a FK, id_squadra_b FK, goal_a, goal_b, id_arbitro FK)
 
 arbitri(ID_arbitro, nome, cognome, data_nascita, anni_esperienza)
