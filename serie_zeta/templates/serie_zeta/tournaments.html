@@ -1,0 +1,14 @@
+{% extends 'serie_zeta/base.html' %}
+
+{% block content %}
+
+  <h2>Tornei</h2>
+
+  <ul>
+    {% for tournament in tournaments %}
+      <li>{{ tournament.name }}</li>
+    {% empty %}
+      <li>Non ci sono tornei</li>
+    {% endfor %}
+  </ul>
+{% endblock content %}
