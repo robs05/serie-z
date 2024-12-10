@@ -4,11 +4,28 @@
 
   <h2>Tornei</h2>
 
-  <ul>
-    {% for tournament in tournaments %}
-      <li>{{ tournament.name }}</li>
-    {% empty %}
-      <li>Non ci sono tornei</li>
-    {% endfor %}
-  </ul>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Codice</th>
+        <th>Data di inizio</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tournament in tournaments %}
+        <tr>
+          <td>{{ tournament.name }}</td>
+          <td>{{ tournament.code }}</td>
+          <td>{{ tournament.start_date }}</td>
+          <td>{{ tournament.id }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">Non ci sono tornei</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+
+
 {% endblock content %}
