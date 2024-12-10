@@ -16,6 +16,6 @@ def tournaments(request):
 def tournament(request, tournament_id):
     """Show a single tournament and all its details."""
     tournament = Tournament.objects.get(id=tournament_id)
-    teams = TournamentParticipation.objects.filter(tournament=tournament)
-    context = {'tournament' : tournament, 'teams' : teams}
+    tournament_teams = TournamentParticipation.objects.filter(tournament=tournament).order_by('team__name')
+    context = {'tournament' : tournament, 'teams' : tournament_teams}
     return render(request, 'serie_zeta/tournament.html', context)

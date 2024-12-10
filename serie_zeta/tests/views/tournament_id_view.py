@@ -17,6 +17,7 @@ class TournamentIdViewTests(TestCase):
         self.assertContains(response, self.tournament.name)
         self.assertEqual(response.context['tournament'].name, self.tournament.name)
         self.assertEqual(response.context['teams'][0].team.name, self.teamA.name)
+        self.assertEqual(response.context['teams'][0].team.players_num_max, self.teamA.players_num_max)
         self.assertEqual(response.context['teams'].count(),2)
 
 
