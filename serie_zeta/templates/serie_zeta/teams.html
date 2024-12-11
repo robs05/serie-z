@@ -1,0 +1,14 @@
+{% extends 'serie_zeta/base.html' %}
+
+{% block content %}
+
+  <h3>Squadre</h3>
+  <ul>
+    {% for team in teams %}
+      <li><a href="{% url 'serie_zeta:team' team.id %}">{{ team.name }}</a></li>
+    {% empty %}
+      <li>Non ci sono squadre</li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}
