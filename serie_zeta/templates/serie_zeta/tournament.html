@@ -5,7 +5,7 @@
   <p> {{ tournament.description }}</p>
   <ul>
     {% for object in teams %}
-      <li>{{ object.team.name }}</li>
+      <li><a href="{% url 'serie_zeta:team' object.team.id %}"> {{ object.team.name }}</a></li>
     {% empty %}
       <li>Non ci sono squadre</li>
     {% endfor %}

@@ -1,0 +1,16 @@
+{% extends 'serie_zeta/base.html' %}
+
+{% block content %}
+  <p>{{ team.name }}</p>
+  <p>Colore divisa: {{ team.jersey_color }}</p>
+  <p>Max Giocatori: {{ team.players_num_max }}</p>
+
+  <ul>
+    {% for player in players %}
+      <li>{{ player.position }} - {{ player.first_name }} {{ player.last_name }} {{ player.jersey_number }}</li>
+    {% empty %}
+      <li>Non ci sono Giocatori</li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}

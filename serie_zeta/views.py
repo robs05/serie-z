@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from serie_zeta.models import Tournament, TournamentParticipation
+from serie_zeta.models import Team
 
 
 def index(request):
@@ -19,3 +20,10 @@ def tournament(request, tournament_id):
     tournament_teams = TournamentParticipation.objects.filter(tournament=tournament).order_by('team__name')
     context = {'tournament' : tournament, 'teams' : tournament_teams}
     return render(request, 'serie_zeta/tournament.html', context)
+
+def team(request, team_id):
+    """Show a single team and all its details."""
+    team = Team.objects.get(id=team_id)
+    players = team.player_set.order_by('position')
+    context = {'team' : team, 'players' : players}
+    return render(request, 'serie_zeta/team.html', context)

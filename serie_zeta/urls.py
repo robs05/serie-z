@@ -13,4 +13,7 @@ urlpatterns = [
 
     # Detail page for a single tournament
     path('tournaments/<int:tournament_id>/', views.tournament, name='tournament'),
+
+    # Detail page for a single team
+    path('teams/<int:team_id>/', views.team, name='team'),
 ]
