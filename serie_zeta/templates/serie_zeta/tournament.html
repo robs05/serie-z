@@ -4,8 +4,8 @@
   <p> Torneo: {{ tournament.name }}</p>
   <p> {{ tournament.description }}</p>
   <ul>
-    {% for team in teams %}
-      <li>{{ team.team.name }}</li>
+    {% for object in teams %}
+      <li>{{ object.team.name }}</li>
     {% empty %}
       <li>Non ci sono squadre</li>
     {% endfor %}

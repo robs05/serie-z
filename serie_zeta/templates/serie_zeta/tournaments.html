@@ -18,7 +18,7 @@
           <td>{{ tournament.name }}</td>
           <td>{{ tournament.code }}</td>
           <td>{{ tournament.start_date }}</td>
-          <td>{{ tournament.id }}</td>
+          <td><a href="{% url 'serie_zeta:tournament' tournament.id %}"> Dettagli </a></td>
         </tr>
       {% empty %}
         <tr>
