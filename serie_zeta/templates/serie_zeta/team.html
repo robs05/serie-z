@@ -7,7 +7,7 @@
 
   <ul>
     {% for player in players %}
-      <li>{{ player.position }} - {{ player.first_name }} {{ player.last_name }} {{ player.jersey_number }}</li>
+      <li>{{ player.jersey_number }} - {{ player.first_name }} {{ player.last_name }} - {{ player.get_position_display }}</li>
     {% empty %}
       <li>Non ci sono Giocatori</li>
     {% endfor %}

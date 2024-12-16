@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from serie_zeta.models import Tournament, TournamentParticipation
 from serie_zeta.models import Team
-
+from serie_zeta.utils import position_order
 
 def index(request):
     """The home page for serie_zeta."""
@@ -30,6 +30,6 @@ def teams(request):
 def team(request, team_id):
     """Show a single team and all its details."""
     team = Team.objects.get(id=team_id)
-    players = team.player_set.order_by('position')
+    players = team.player_set.annotate(position_display=position_order).order_by('-position_display')
     context = {'team' : team, 'players' : players}
     return render(request, 'serie_zeta/team.html', context)
