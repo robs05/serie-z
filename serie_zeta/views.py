@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from serie_zeta.models import Tournament, TournamentParticipation
 from serie_zeta.models import Team
+
+from .forms import TeamForm
+
 from serie_zeta.utils import position_order
 
 def index(request):
@@ -33,3 +36,20 @@ def team(request, team_id):
     players = team.player_set.annotate(position_display=position_order).order_by('-position_display')
     context = {'team' : team, 'players' : players}
     return render(request, 'serie_zeta/team.html', context)
+
+def new_team(request):
+    """Add a new team."""
+    if request.method != 'POST':
+        # No data submitted; create a blank form.
+        form = TeamForm()
+    else:
+        # POST data submitted; process data.
+        form = TeamForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('serie_zeta:teams')
+
+    # Display a blank or invalid form.
+    context = {'form' : form}
+    return render(request, 'serie_zeta/new_team.html', context)
+

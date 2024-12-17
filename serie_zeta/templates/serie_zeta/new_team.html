@@ -1,0 +1,12 @@
+{% extends 'serie_zeta/base.html' %}
+
+{% block content %}
+  <p>Aggiungi una nuova squdra</p>
+
+  <form action="{% url 'serie_zeta:new_team' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button name="submit">Aggiungi Squadra</button>
+  </form>
+
+{% endblock content %}

@@ -73,3 +73,10 @@ generate html report
 coverage html
 ```
 
+## Clean repository working tree
+```bash
+git stash
+git stash pop
+```
+
+
