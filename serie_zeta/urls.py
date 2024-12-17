@@ -9,11 +9,14 @@ app_name = 'serie_zeta'
 urlpatterns = [# List of all tournaments
     path('', views.index, name='index'),
 
-
+    # List of all tournaments
     path('tournaments/', views.tournaments, name='tournaments'),
 
     # Detail page for a single tournament
     path('tournaments/<int:tournament_id>/', views.tournament, name='tournament'),
+
+    # Page for adding a new tournament
+    path('new_tournament/', views.new_tournament, name='new_tournament'),
 
     # List of all teams
     path('teams/', views.teams, name='teams'),

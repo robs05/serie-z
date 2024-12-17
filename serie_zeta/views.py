@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from serie_zeta.models import Tournament, TournamentParticipation
 from serie_zeta.models import Team
 
-from .forms import TeamForm
+from .forms import TeamForm, TournamentForm
 
 from serie_zeta.utils import position_order
 
@@ -23,6 +23,22 @@ def tournament(request, tournament_id):
     tournament_teams = TournamentParticipation.objects.filter(tournament=tournament).order_by('team__name')
     context = {'tournament' : tournament, 'teams' : tournament_teams}
     return render(request, 'serie_zeta/tournament.html', context)
+
+def new_tournament(request):
+    """Add a new tournament."""
+    if request.method != 'POST':
+        # No data submitted; create a blank form.
+        form = TournamentForm()
+    else:
+        # POST data submitted; process data.
+        form = TournamentForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('serie_zeta:tournaments')
+
+    # Display a blank or invalid form.
+    context = {'form' : form}
+    return render(request, 'serie_zeta/new_tournament.html', context)
 
 def teams(request):
     """Show all teams."""

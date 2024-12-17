@@ -21,7 +21,7 @@ class Tournament(models.Model):
     description = models.TextField()
     start_date = models.DateField()
     end_date = models.DateField()
-    teams = models.ManyToManyField(Team, through='TournamentParticipation')
+    teams = models.ManyToManyField(Team, through='TournamentParticipation', blank=True)
 
     def __str__(self):
         return self.name + " - " + self.code

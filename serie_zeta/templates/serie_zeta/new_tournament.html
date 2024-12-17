@@ -1,0 +1,12 @@
+{% extends 'serie_zeta/base.html' %}
+
+{% block content %}
+  <p>Aggiungi un torneo</p>
+
+  <form action="{% url 'serie_zeta:new_tournament' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button name="submit">Aggiungi Torneo</button>
+  </form>
+
+{% endblock content %}
