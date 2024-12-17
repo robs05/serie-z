@@ -5,7 +5,8 @@
   <h3>Squadre</h3>
   <ul>
     {% for team in teams %}
-      <li><a href="{% url 'serie_zeta:team' team.id %}">{{ team.name }}</a></li>
+      <li><a href="{% url 'serie_zeta:team' team.id %}">{{ team.name }} {{ team.id }}</a> -
+      <a href="{% url 'serie_zeta:edit_team' team.id %}">Modifica</a></li>
     {% empty %}
       <li>Non ci sono squadre</li>
     {% endfor %}

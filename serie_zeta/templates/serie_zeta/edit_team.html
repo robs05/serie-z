@@ -1,0 +1,12 @@
+{% extends "serie_zeta/base.html" %}
+
+{% block content %}
+
+  <p>Modifica Squadra</p>
+
+  <form action="{% url 'serie_zeta:edit_team' team.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button type="submit">Salva</button>
+  </form>
+{% endblock content %}

@@ -69,3 +69,18 @@ def new_team(request):
     context = {'form' : form}
     return render(request, 'serie_zeta/new_team.html', context)
 
+def edit_team(request, team_id):
+    """Edit an existing team."""
+    team = Team.objects.get(id=team_id)
+    if request.method != 'POST':
+        # Initial request; pre-fill form with the current team.
+        form = TeamForm(instance=team)
+    else:
+        # POST data submitted; process data.
+        form = TeamForm(instance=team, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('serie_zeta:team', team_id=team_id)
+
+    context = {'team' : team, 'form' : form}
+    return render(request, 'serie_zeta/edit_team.html', context)

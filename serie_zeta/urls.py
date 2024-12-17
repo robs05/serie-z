@@ -26,4 +26,7 @@ urlpatterns = [# List of all tournaments
 
     # Page for adding a new team
     path('new_team/', views.new_team, name='new_team'),
+
+    # Page for editing a team
+    path('edit_team/<int:team_id>/', views.edit_team, name='edit_team'),
 ]
