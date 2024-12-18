@@ -96,7 +96,7 @@ def edit_team(request, team_id):
         form = TeamForm(instance=team, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('serie_zeta:team', team_id=team_id)
+            return redirect('serie_zeta:teams')
 
     context = {'team' : team, 'form' : form}
     return render(request, 'serie_zeta/edit_team.html', context)
