@@ -40,6 +40,22 @@ def new_tournament(request):
     context = {'form' : form}
     return render(request, 'serie_zeta/new_tournament.html', context)
 
+def edit_tournament(request, tournament_id):
+    """Edit an existing tournament."""
+    tournament = Tournament.objects.get(id=tournament_id)
+    if request.method != 'POST':
+        # Initial request; pre-fill form with the current tournament.
+        form = TournamentForm(instance=tournament)
+    else:
+        # POST data submitted; process data.
+        form = TournamentForm(instance=tournament, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('serie_zeta:tournaments')
+
+    context = {'tournament' : tournament, 'form' : form}
+    return render(request, 'serie_zeta/edit_tournament.html', context)
+
 def teams(request):
     """Show all teams."""
     teams = Team.objects.order_by('name')

@@ -2,9 +2,9 @@
 
 {% block content %}
 
-  <p>Modifica Squadra</p>
+  <p>Modifica Torneo</p>
 
-  <form action="{% url 'serie_zeta:edit_team' team.id %}" method="post">
+  <form action="{% url 'serie_zeta:edit_tournament' tournament.id %}" method="post">
     {% csrf_token %}
     {{ form.as_div }}
     <button name="submit">Salva</button>
