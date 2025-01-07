@@ -1,0 +1,12 @@
+{% extends 'serie_zeta/base.html' %}
+
+{% block content %}
+
+  <p>{{ player.last_name }} {{ player.first_name }}</p>
+  <p>Data di nascita: {{ player.birth_date }}</p>
+  <p>Ruolo: {{ player.get_position_display }}</p>
+  <p>Capitano: {{ player.captain }}</p>
+  <p>Numero maglia: {{ player.jersey_number }}</p>
+  <p>Squadra: {{ player.team.name }}</p>
+
+{% endblock content %}

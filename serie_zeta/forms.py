@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Team, Tournament
+from .models import Team, Tournament, Player
 
 class TournamentForm(forms.ModelForm):
     class Meta:
@@ -29,4 +29,23 @@ class TeamForm(forms.ModelForm):
             'name': 'Nome',
             'jersey_color': 'Colore maglia',
             'players_num_max': 'Num. max giocatori'
+        }
+
+
+class PlayerForm(forms.ModelForm):
+    class Meta:
+        model = Player
+        fields = ['first_name', 'last_name', 'birth_date', 'position', 'captain', 'jersey_number', 'team']
+        labels = {
+            'first_name': 'Nome',
+            'last_name': 'Cognome',
+            'birth_date': 'Data di nascita',
+            'position': 'Ruolo',
+            'captain': 'Capitano',
+            'jersey_number': 'Numero maglia',
+            'team': 'Squadra',
+        }
+        widgets = {
+            'birth_date': forms.DateInput(attrs={'type': 'date'}),
+            'team': forms.Select(attrs={'required': False}),
         }

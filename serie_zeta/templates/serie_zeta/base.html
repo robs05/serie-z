@@ -2,6 +2,7 @@
   <a href="{% url 'serie_zeta:index' %}">Serie Z</a> -
   <a href="{% url 'serie_zeta:tournaments' %}">Tornei</a> -
   <a href="{% url 'serie_zeta:teams' %}">Squadre</a> -
+  <a href="{% url 'serie_zeta:players' %}">Giocatori</a> -
   {% if user.is_authenticated %}
     Hello, {{ user.username }}.
   {% else %}

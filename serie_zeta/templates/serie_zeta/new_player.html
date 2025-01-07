@@ -1,0 +1,13 @@
+{% extends 'serie_zeta/base.html' %}
+
+{% block content %}
+
+  <p>Aggiungi un nuovo giocatore</p>
+
+  <form action="{% url 'serie_zeta:new_player' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button name="submit">Aggiungi Giocatore</button>
+  </form>
+
+{% endblock content %}
