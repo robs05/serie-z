@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
@@ -6,7 +7,7 @@ from serie_zeta.models import Team, Player
 
 from .forms import TeamForm, TournamentForm, PlayerForm
 
-from serie_zeta.utils import position_order
+from serie_zeta.utils import position_order, get_random_string
 
 def index(request):
     """The home page for serie_zeta."""
@@ -16,7 +17,7 @@ def index(request):
 @login_required
 def tournaments(request):
     """Show all tournaments."""
-    tournaments = Tournament.objects.order_by('start_date')
+    tournaments = Tournament.objects.filter(owner=request.user).order_by('start_date')
     context = {'tournaments' : tournaments}
     return render(request, 'serie_zeta/tournaments.html', context)
 

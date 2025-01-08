@@ -22,6 +22,7 @@ class Tournament(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     teams = models.ManyToManyField(Team, through='TournamentParticipation', blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name + " - " + self.code
@@ -48,14 +49,14 @@ class Player(models.Model):
         (COACH, 'Allenatore'),
     ]
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     birth_date = models.DateField()
     position = models.CharField(max_length=50, choices=POSITION_CHOICES)
     captain = models.BooleanField()
     jersey_number = models.IntegerField()
-    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
+    team = models.ForeignKey('Team', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.position} {self.jersey_number}"
