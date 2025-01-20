@@ -6,6 +6,7 @@ class Team(models.Model):
     jersey_color = models.CharField(max_length=50)
     players_num_max = models.IntegerField()
     is_deleted = models.BooleanField(default=False)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def delete(self, *args, **kwargs):
         self.player_set.update(team=None)
@@ -31,6 +32,7 @@ class TournamentParticipation(models.Model):
     team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, limit_choices_to={'is_deleted': False})
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
     participation_date = models.DateField(auto_now_add=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tournament_participations')
 
     def __str__(self):
         return f"{self.team.name} in {self.tournament.name} - {self.participation_date}"
@@ -57,6 +59,7 @@ class Player(models.Model):
     captain = models.BooleanField()
     jersey_number = models.IntegerField()
     team = models.ForeignKey('Team', on_delete=models.SET_NULL, null=True, blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='player_owner')
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.position} {self.jersey_number}"

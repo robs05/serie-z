@@ -20,6 +20,11 @@ class TournamentForm(forms.ModelForm):
             'teams': forms.SelectMultiple(attrs={'required': False}),
         }
 
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields['teams'].queryset = Team.objects.filter(owner=user, is_deleted=False)
 
 class TeamForm(forms.ModelForm):
     class Meta:
@@ -49,3 +54,9 @@ class PlayerForm(forms.ModelForm):
             'birth_date': forms.DateInput(attrs={'type': 'date'}),
             'team': forms.Select(attrs={'required': False}),
         }
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields['team'].queryset = Team.objects.filter(owner=user, is_deleted=False)
