@@ -35,6 +35,9 @@ INSTALLED_APPS = [
     'serie_zeta',
     'accounts',
 
+    # Third party apps.
+    'django_bootstrap5',
+
     # Default django apps.
     'django.contrib.admin',
     'django.contrib.auth',

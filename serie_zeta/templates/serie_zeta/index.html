@@ -1,7 +1,23 @@
 {% extends 'serie_zeta/base.html' %}
 
-{% block content %}
-  <p>Questa piattaforma ti aiuterà ad organizzare tornei di calcetto</p>
 
-  <p>Work in Progress!</p>
+{% block page_header %}
+  <div class="p-3 mb-4 bg-light border rounded-3">
+    <div class="container-fluid py-4">
+      <h1 class="display-3">Serie Z.</h1>
+      <p class="lead">Questa piattaforma permette di gestire tornei di calcetto.</p>
+      {% if user.is_authenticated == False %}
+        <a class="btn btn-primary btn-lg mt-1"
+           href="{% url 'accounts:register' %}">Register &raquo;</a>
+        <a class="btn btn-primary btn-lg mt-1"
+         href="{% url 'accounts:login' %}">Login &raquo;</a>
+      {% else %}
+        <a class="btn btn-primary" href="{% url 'learning_logs:topics' %}">Topics</a>
+      {% endif %}
+    </div>
+  </div>
+{% endblock page_header %}
+
+{% block content %}
+
 {% endblock content %}
