@@ -25,6 +25,11 @@
                     class="link-underline link-underline-opacity-0">
                     {% bs_icon 'pencil-square' size='1.15em'%}</a>
                 </div>
+                <div class="col-1">
+                  <a href="{% url 'serie_zeta:delete_player' player.id %}"
+                    class="link-underline link-underline-opacity-0" >
+                    {% bs_icon 'trash' size='1.15em' color='red'%}</a>
+                </div>
               </div>
 
           </div>

@@ -185,3 +185,13 @@ def edit_player(request, player_id):
 
     context = {'player' : player, 'form' : form}
     return render(request, 'serie_zeta/edit_player.html', context)
+
+@login_required
+def delete_player(request, player_id):
+    """Delete an existing player."""
+    player = Player.objects.get(id=player_id)
+    if player.owner != request.user:
+        raise Http404
+    player.delete()
+    return redirect('serie_zeta:players')
+
