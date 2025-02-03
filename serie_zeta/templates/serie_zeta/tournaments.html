@@ -1,34 +1,47 @@
 {% extends 'serie_zeta/base.html' %}
+{% load bootstrap_icons %}
+
+{% block page_header %}
+  <h1>Tornei</h1>
+{% endblock page_header %}
+
 
 {% block content %}
+  <div class="container w-75">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Cod</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Data di inizio</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tournament in tournaments %}
+            <tr>
+              <th scope="row">{{ tournament.code }}</th>
+              <td>{{ tournament.name }}</td>
+              <td>{{ tournament.start_date }}</td>
+              <td><a href="{% url 'serie_zeta:tournament' tournament.id %}"
+                class="link-underline link-underline-opacity-0"> Dettagli </a></td>
+              <td><a href="{% url 'serie_zeta:edit_tournament' tournament.id %}"
+                    class="link-underline link-underline-opacity-0">
+                    {% bs_icon 'pencil-square' size='1.15em'%}
+                  </a>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="3">Non ci sono tornei</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
 
-  <h2>Tornei</h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Codice</th>
-        <th>Data di inizio</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for tournament in tournaments %}
-        <tr>
-          <td>{{ tournament.name }}</td>
-          <td>{{ tournament.code }}</td>
-          <td>{{ tournament.start_date }}</td>
-          <td><a href="{% url 'serie_zeta:tournament' tournament.id %}"> Dettagli </a></td>
-          <td><a href="{% url 'serie_zeta:edit_tournament' tournament.id %}"> Modifica</a></td>
-        </tr>
-      {% empty %}
-        <tr>
-          <td colspan="3">Non ci sono tornei</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-  <a href="{% url 'serie_zeta:new_tournament' %}">Aggiungi un torneo</a>
-
+      <div class="button mt-2">
+        <a class="btn btn-primary" href="{% url 'serie_zeta:new_tournament' %}">Crea torneo</a>
+      </div>
+    </div>
+  </div>
 {% endblock content %}

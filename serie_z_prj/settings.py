@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +36,7 @@ INSTALLED_APPS = [
 
     # Third party apps.
     'django_bootstrap5',
+    'django_bootstrap_icons',
 
     # Default django apps.
     'django.contrib.admin',

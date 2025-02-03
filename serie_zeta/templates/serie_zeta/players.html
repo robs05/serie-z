@@ -1,15 +1,44 @@
 {% extends 'serie_zeta/base.html' %}
+{% load bootstrap_icons %}
+
+{% block page_header %}
+  <h1>Giocatori</h1>
+{% endblock page_header %}
 
 {% block content %}
-  <h3>Giocatori</h3>
-  <ul>
-    {% for player in players %}
-      <li><a href="{% url 'serie_zeta:player' player.id %}">{{ player.last_name }} {{ player.first_name }}</a> -
-      <a href="{% url 'serie_zeta:edit_player' player.id %}">Modifica</a></li>
-    {% empty %}
-      <li>Non ci sono giocatori</li>
-    {% endfor %}
-  </ul>
+  <div class="container w-50">
+    <ul class="list-group">
+      {% for player in players %}
+        <li class="list-group-item list-group-item-action">
+          <div class="container">
+              <div class="row">
+                <div class="col-6">
+                  <a href="{% url 'serie_zeta:player' player.id %}"
+                    class="link-underline link-underline-opacity-0 p-3">
+                    {{ player.last_name }} {{ player.first_name }}</a>
+                </div>
+                <div class="col">
+                  {{ player.team }}
+                </div>
+                <div class="col-1">
+                  <a href="{% url 'serie_zeta:edit_player' player.id %}"
+                    class="link-underline link-underline-opacity-0">
+                    {% bs_icon 'pencil-square' size='1.15em'%}</a>
+                </div>
+              </div>
 
-  <a href="{% url 'serie_zeta:new_player' %}">Aggiungi un nuovo giocatore</a>
+          </div>
+        </li>
+      {% empty %}
+        <li class="list-group-item">Non ci sono giocatori</li>
+      {% endfor %}
+    </ul>
+
+
+
+    <div class="button mt-2">
+      <a class="btn btn-primary" href="{% url 'serie_zeta:new_player' %}">Crea giocatore</a>
+    </div>
+  </div>
+
 {% endblock content %}

@@ -1,12 +1,16 @@
 {% extends 'serie_zeta/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+  <h1>Aggiungi Squadra</h1>
+{% endblock page_header %}
 
 {% block content %}
-  <p>Aggiungi una nuova squdra</p>
 
   <form action="{% url 'serie_zeta:new_team' %}" method="post">
     {% csrf_token %}
-    {{ form.as_div }}
-    <button name="submit">Aggiungi Squadra</button>
+    {% bootstrap_form form%}
+    {% bootstrap_button button_type="submit" content="Aggiungi Squadra" %}
   </form>
 
 {% endblock content %}

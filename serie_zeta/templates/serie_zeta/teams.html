@@ -1,16 +1,33 @@
 {% extends 'serie_zeta/base.html' %}
+{% load bootstrap_icons %}
+
+{% block page_header %}
+  <h1>Squadre</h1>
+{% endblock page_header %}
 
 {% block content %}
+  <div class="container w-75">
+    <ul class="list-group">
+      {% for team in teams %}
+        <li class="list-group-item list-group-item-action">
+          <div class="container d-flex justify-content-between">
+            <a href="{% url 'serie_zeta:team' team.id %}"
+               class="link-underline link-underline-opacity-0">
+              {{ team.name }}
+            </a>
+            <a href="{% url 'serie_zeta:edit_team' team.id %}"
+               class="link-underline link-underline-opacity-0">
+              {% bs_icon 'pencil-square' size='1.15em'%}
+            </a>
+          </div>
+        </li>
+      {% empty %}
+        <li class="list-group-item">Non ci sono squadre</li>
+      {% endfor %}
+    </ul>
 
-  <h3>Squadre</h3>
-  <ul>
-    {% for team in teams %}
-      <li><a href="{% url 'serie_zeta:team' team.id %}">{{ team.name }}</a> -
-      <a href="{% url 'serie_zeta:edit_team' team.id %}">Modifica</a></li>
-    {% empty %}
-      <li>Non ci sono squadre</li>
-    {% endfor %}
-  </ul>
-
-  <a href="{% url 'serie_zeta:new_team' %}">Aggiungi una nuova squadra</a>
+    <div class="button mt-2">
+      <a class="btn btn-primary" href="{% url 'serie_zeta:new_team' %}">Crea squadra</a>
+    </div>
+  </div>
 {% endblock content %}

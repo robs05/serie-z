@@ -1,7 +1,10 @@
 {% extends 'serie_zeta/base.html' %}
 
+{% block page_header %}
+  <h3> Torneo: {{ tournament.name }}</h3>
+{% endblock page_header %}
+
 {% block content %}
-  <p> Torneo: {{ tournament.name }}</p>
   <p> {{ tournament.description }}</p>
   <ul>
     {% for object in teams %}

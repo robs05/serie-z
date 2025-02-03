@@ -1,7 +1,11 @@
 {% extends 'serie_zeta/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+  <h3>{{ team.name }}</h3>
+{% endblock page_header %}
 
 {% block content %}
-  <p>{{ team.name }}</p>
   <p>Colore divisa: {{ team.jersey_color }}</p>
   <p>Max Giocatori: {{ team.players_num_max }}</p>
 
