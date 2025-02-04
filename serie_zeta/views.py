@@ -8,7 +8,7 @@ from serie_zeta.models import Team, Player
 
 from .forms import TeamForm, TournamentForm, PlayerForm
 
-from serie_zeta.utils import position_order, get_random_string
+from serie_zeta.utils import position_order
 
 def index(request):
     """The home page for serie_zeta."""
@@ -48,6 +48,9 @@ def new_tournament(request):
             new_tournament.owner = request.user
             new_tournament.save()
 
+            for team in form.cleaned_data['teams']:
+                TournamentParticipation.objects.create(tournament=new_tournament, team=team, owner=request.user)
+
             return redirect('serie_zeta:tournaments')
 
     # Display a blank or invalid form.
@@ -67,17 +70,30 @@ def edit_tournament(request, tournament_id):
         # POST data submitted; process data.
         form = TournamentForm(instance=tournament, data=request.POST, user=request.user)
         if form.is_valid():
+            updated_tournament = form.save(commit=False)
+            TournamentParticipation.objects.filter(tournament=updated_tournament).delete()
+            for team in form.cleaned_data['teams']:
+                TournamentParticipation.objects.create(tournament=updated_tournament, team=team, owner=request.user)
             form.save()
             return redirect('serie_zeta:tournaments')
 
-    context = {'tournament' : tournament, 'form' : form}
+    context = {'tournament': tournament, 'form': form}
     return render(request, 'serie_zeta/edit_tournament.html', context)
+
+@login_required
+def delete_tournament(request, tournament_id):
+    """Delete an existing tournament."""
+    tournament = Tournament.objects.get(id=tournament_id)
+    if tournament.owner != request.user:
+        raise Http404
+    tournament.delete()
+    return redirect('serie_zeta:tournaments')
 
 # Team ----------------------------
 @login_required
 def teams(request):
     """Show all teams."""
-    teams = Team.objects.filter(owner=request.user).order_by('name')
+    teams = Team.objects.filter(owner=request.user, is_deleted=False).order_by('name')
     context = {'teams' : teams}
     return render(request, 'serie_zeta/teams.html', context)
 
@@ -129,6 +145,17 @@ def edit_team(request, team_id):
 
     context = {'team' : team, 'form' : form}
     return render(request, 'serie_zeta/edit_team.html', context)
+
+@login_required
+def delete_team(request, team_id):
+    """Delete an existing team."""
+    print(team_id)
+    team = Team.objects.get(id=team_id)
+    print(team)
+    if team.owner != request.user:
+        raise Http404
+    team.delete()
+    return redirect('serie_zeta:teams')
 
 # Player ----------------------------
 @login_required

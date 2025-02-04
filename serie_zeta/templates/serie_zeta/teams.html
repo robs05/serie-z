@@ -10,15 +10,24 @@
     <ul class="list-group">
       {% for team in teams %}
         <li class="list-group-item list-group-item-action">
-          <div class="container d-flex justify-content-between">
-            <a href="{% url 'serie_zeta:team' team.id %}"
-               class="link-underline link-underline-opacity-0">
-              {{ team.name }}
-            </a>
-            <a href="{% url 'serie_zeta:edit_team' team.id %}"
-               class="link-underline link-underline-opacity-0">
-              {% bs_icon 'pencil-square' size='1.15em'%}
-            </a>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <a href="{% url 'serie_zeta:team' team.id %}"
+                   class="link-underline link-underline-opacity-0">
+                  {{ team.name }}</a>
+              </div>
+              <div class="col-1">
+                <a href="{% url 'serie_zeta:edit_team' team.id %}"
+                   class="link-underline link-underline-opacity-0">
+                  {% bs_icon 'pencil-square' size='1.15em'%}</a>
+              </div>
+              <div class="col-1">
+                <a class="p-2 link-underline link-underline-opacity-0"
+                   href="{% url 'serie_zeta:delete_team' team.id %}">
+                  {% bs_icon 'trash' size='1.15em' color='red'%}</a>
+              </div>
+            </div>
           </div>
         </li>
       {% empty %}

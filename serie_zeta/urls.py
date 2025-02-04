@@ -22,6 +22,9 @@ urlpatterns = [# List of all tournaments
     # Page for editing a tournament
     path('edit_tournament/<int:tournament_id>/', views.edit_tournament, name='edit_tournament'),
 
+    # Delete a tournament
+    path('delete_tournament/<int:tournament_id>/', views.delete_tournament, name='delete_tournament'),
+
     # Team ----------------------------
     # List of all teams
     path('teams/', views.teams, name='teams'),
@@ -34,6 +37,8 @@ urlpatterns = [# List of all tournaments
 
     # Page for editing a team
     path('edit_team/<int:team_id>/', views.edit_team, name='edit_team'),
+
+    path('delete_team/<int:team_id>/', views.delete_team, name='delete_team'),
 
     # Player ----------------------------
     # List of all players

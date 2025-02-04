@@ -29,6 +29,9 @@
                     class="link-underline link-underline-opacity-0">
                     {% bs_icon 'pencil-square' size='1.15em'%}
                   </a>
+                  <a href="{% url 'serie_zeta:delete_tournament' tournament.id %}"
+                    class="link-underline link-underline-opacity-0" >
+                    {% bs_icon 'trash' size='1.15em' color='red'%}</a>
               </td>
             </tr>
           {% empty %}
