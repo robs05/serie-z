@@ -10,7 +10,7 @@
 
   <p>Modifica Giocatore</p>
 
-  <form action="{% url 'serie_zeta:edit_player' player.id %}" method="post">
+  <form action="{% url 'player:edit_player' player.id %}" method="post">
     {% csrf_token %}
     {% bootstrap_form form%}
     {% bootstrap_button button_type="submit" content="Salva" %}

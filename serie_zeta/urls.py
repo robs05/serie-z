@@ -40,19 +40,5 @@ urlpatterns = [# List of all tournaments
 
     path('delete_team/<int:team_id>/', views.delete_team, name='delete_team'),
 
-    # Player ----------------------------
-    # List of all players
-    path('players/', views.players, name='players'),
 
-    # Detail page for a single player
-    path('players/<int:player_id>/', views.player, name='player'),
-
-    # Page for adding a new player
-    path('new_player/', views.new_player, name='new_player'),
-
-    # Page for editing a player
-    path('edit_player/<int:player_id>/', views.edit_player, name='edit_player'),
-
-    # Delete a player
-    path('delete_player/<int:player_id>/', views.delete_player, name='delete_player')
 ]

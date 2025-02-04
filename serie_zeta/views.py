@@ -6,7 +6,7 @@ from django.http import Http404
 from serie_zeta.models import Tournament, TournamentParticipation
 from serie_zeta.models import Team, Player
 
-from .forms import TeamForm, TournamentForm, PlayerForm
+from .forms import TeamForm, TournamentForm
 
 from serie_zeta.utils import position_order
 
@@ -157,68 +157,4 @@ def delete_team(request, team_id):
     team.delete()
     return redirect('serie_zeta:teams')
 
-# Player ----------------------------
-@login_required
-def players(request):
-    """Show all players."""
-    players = Player.objects.filter(owner=request.user).order_by('last_name')
-    context = {'players' : players}
-    return render(request, 'serie_zeta/players.html', context)
-
-@login_required
-def player(request, player_id):
-    """Show a single player and all its details."""
-    player = Player.objects.get(id=player_id)
-    if player.owner != request.user:
-        raise Http404
-    context = {'player' : player}
-    return render(request, 'serie_zeta/player.html', context)
-
-@login_required
-def new_player(request):
-    """Add a new player."""
-    if request.method != 'POST':
-        # No data submitted; create a blank form.
-        form = PlayerForm(user=request.user)
-    else:
-        # POST data submitted; process data.
-        form = PlayerForm(data=request.POST)
-        if form.is_valid():
-            new_player = form.save(commit=False)
-            new_player.owner = request.user
-            new_player.save()
-
-            return redirect('serie_zeta:players')
-
-    # Display a blank or invalid form.
-    context = {'form' : form}
-    return render(request, 'serie_zeta/new_player.html', context)
-
-@login_required
-def edit_player(request, player_id):
-    """Edit an existing player."""
-    player = Player.objects.get(id=player_id)
-    if player.owner != request.user:
-        raise Http404
-    if request.method != 'POST':
-        # Initial request; pre-fill form with the current player.
-        form = PlayerForm(instance=player, user=request.user)
-    else:
-        # POST data submitted; process data.
-        form = PlayerForm(instance=player, data=request.POST, user=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('serie_zeta:players')
-
-    context = {'player' : player, 'form' : form}
-    return render(request, 'serie_zeta/edit_player.html', context)
-
-@login_required
-def delete_player(request, player_id):
-    """Delete an existing player."""
-    player = Player.objects.get(id=player_id)
-    if player.owner != request.user:
-        raise Http404
-    player.delete()
-    return redirect('serie_zeta:players')
 

@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     # My Apps.
     'serie_zeta',
     'accounts',
+    'player',
 
     # Third party apps.
     'django_bootstrap5',

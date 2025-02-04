@@ -9,7 +9,7 @@
 
   <p>Aggiungi un nuovo giocatore</p>
 
-  <form action="{% url 'serie_zeta:new_player' %}" method="post">
+  <form action="{% url 'player:new_player' %}" method="post">
     {% csrf_token %}
     {% bootstrap_form form%}
     {% bootstrap_button button_type="submit" content="Aggiungi Giocatore" %}
