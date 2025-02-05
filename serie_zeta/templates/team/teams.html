@@ -13,18 +13,18 @@
           <div class="container">
             <div class="row">
               <div class="col">
-                <a href="{% url 'serie_zeta:team' team.id %}"
+                <a href="{% url 'team:team' team.id %}"
                    class="link-underline link-underline-opacity-0">
                   {{ team.name }}</a>
               </div>
               <div class="col-1">
-                <a href="{% url 'serie_zeta:edit_team' team.id %}"
+                <a href="{% url 'team:edit_team' team.id %}"
                    class="link-underline link-underline-opacity-0">
                   {% bs_icon 'pencil-square' size='1.15em'%}</a>
               </div>
               <div class="col-1">
                 <a class="p-2 link-underline link-underline-opacity-0"
-                   href="{% url 'serie_zeta:delete_team' team.id %}">
+                   href="{% url 'team:delete_team' team.id %}">
                   {% bs_icon 'trash' size='1.15em' color='red'%}</a>
               </div>
             </div>
@@ -36,7 +36,7 @@
     </ul>
 
     <div class="button mt-2">
-      <a class="btn btn-primary" href="{% url 'serie_zeta:new_team' %}">Crea squadra</a>
+      <a class="btn btn-primary" href="{% url 'team:new_team' %}">Crea squadra</a>
     </div>
   </div>
 {% endblock content %}

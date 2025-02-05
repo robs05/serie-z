@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Team, Tournament, Player
+from .models import Team, Tournament
 
 class TournamentForm(forms.ModelForm):
     class Meta:
@@ -25,13 +25,3 @@ class TournamentForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if user:
             self.fields['teams'].queryset = Team.objects.filter(owner=user, is_deleted=False)
-
-class TeamForm(forms.ModelForm):
-    class Meta:
-        model = Team
-        fields = ['name', 'jersey_color', 'players_num_max']
-        labels = {
-            'name': 'Nome',
-            'jersey_color': 'Colore maglia',
-            'players_num_max': 'Num. max giocatori'
-        }

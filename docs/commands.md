@@ -58,6 +58,11 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
+### Create app
+```bash
+python manage.py startapp [nome_app]
+```
+
 ## Test
 ```bash
 python manage.py test serie_zeta/tests

@@ -7,7 +7,7 @@
 
 {% block content %}
 
-  <form action="{% url 'serie_zeta:edit_team' team.id %}" method="post">
+  <form action="{% url 'team:edit_team' team.id %}" method="post">
     {% csrf_token %}
     {% bootstrap_form form%}
     {% bootstrap_button button_type="submit" content="Salva" %}

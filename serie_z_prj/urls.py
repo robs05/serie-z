@@ -21,5 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('', include('serie_zeta.urls')),
-    path('', include('player.urls'))
+    path('', include('player.urls')),
+    path('', include('team.urls')),
+
 ]

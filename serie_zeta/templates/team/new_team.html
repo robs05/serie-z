@@ -7,7 +7,7 @@
 
 {% block content %}
 
-  <form action="{% url 'serie_zeta:new_team' %}" method="post">
+  <form action="{% url 'team:new_team' %}" method="post">
     {% csrf_token %}
     {% bootstrap_form form%}
     {% bootstrap_button button_type="submit" content="Aggiungi Squadra" %}

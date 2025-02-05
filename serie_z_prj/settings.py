@@ -31,9 +31,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # My Apps.
-    'serie_zeta',
     'accounts',
+    'serie_zeta',
     'player',
+    'team',
 
     # Third party apps.
     'django_bootstrap5',

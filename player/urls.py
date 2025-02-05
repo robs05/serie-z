@@ -2,7 +2,6 @@
 
 from django.urls import path
 
-from serie_zeta.urls import app_name
 from . import views
 
 app_name = 'player'
